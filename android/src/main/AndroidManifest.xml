@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.nat.communication">
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <application android:allowBackup="false" android:label="@string/app_name"
+        android:supportsRtl="true">
+
+    </application>
+
+</manifest>
