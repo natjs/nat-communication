@@ -9,10 +9,16 @@ import java.util.HashMap;
 
 /**
  * Created by xuqinchao on 17/2/7.
+ * Copyright (c) 2017 Nat. All rights reserved.
  */
 
 public class HLCommModule {
     public static void call(Context context,  String number, final HLModuleResultListener listener)  {
+        if (listener == null) return;
+        if (context == null) {
+            listener.onResult("Context对象不能为空");
+            return;
+        }
         boolean tel = HLUtil.isTel(number);
         if (!tel || TextUtils.isEmpty(number)) {
             listener.onResult(HLUtil.getError(HLConstant.CALL_INVALID_ARGUMENT, HLConstant.CALL_INVALID_ARGUMENT_CODE));
@@ -32,6 +38,12 @@ public class HLCommModule {
     }
 
     public static void mail(Context context, String[] tos, HashMap<String, String> params, HLModuleResultListener listener){
+        if (listener == null) return;
+        if (context == null) {
+            listener.onResult("Context对象不能为空");
+            return;
+        }
+
         if (tos==null||tos.length<1){
             listener.onResult(HLUtil.getError(HLConstant.MAIL_INVALID_ARGUMENT, HLConstant.MAIL_INVALID_ARGUMENT_CODE));
             return;
@@ -62,6 +74,12 @@ public class HLCommModule {
     }
 
     public static void sms(Context context, String[] tos, final String text, HLModuleResultListener listener) {
+        if (listener == null) return;
+        if (context == null) {
+            listener.onResult("Context对象不能为空");
+            return;
+        }
+        
         if (tos == null || tos.length < 1) {
             listener.onResult(HLUtil.getError(HLConstant.SMS_INVALID_ARGUMENT, HLConstant.SMS_INVALID_ARGUMENT_CODE));
             return;
