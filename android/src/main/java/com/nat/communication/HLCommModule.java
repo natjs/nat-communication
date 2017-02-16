@@ -13,12 +13,29 @@ import java.util.HashMap;
  */
 
 public class HLCommModule {
-    public static void call(Context context,  String number, final HLModuleResultListener listener)  {
-        if (listener == null) return;
-        if (context == null) {
-            listener.onResult("Context对象不能为空");
-            return;
+
+    private Context mContext;
+    private static volatile HLCommModule instance = null;
+
+    private HLCommModule(Context context){
+        mContext = context;
+    }
+
+    public static HLCommModule getInstance(Context context) {
+        if (instance == null) {
+            synchronized (HLCommModule.class) {
+                if (instance == null) {
+                    instance = new HLCommModule(context);
+                }
+            }
         }
+
+        return instance;
+    }
+
+    public void call(String number, final HLModuleResultListener listener)  {
+        if (listener == null) return;
+
         boolean tel = HLUtil.isTel(number);
         if (!tel || TextUtils.isEmpty(number)) {
             listener.onResult(HLUtil.getError(HLConstant.CALL_INVALID_ARGUMENT, HLConstant.CALL_INVALID_ARGUMENT_CODE));
@@ -28,7 +45,7 @@ public class HLCommModule {
         try {
             Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + number));
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(
+            mContext.startActivity(
                     intent);
             listener.onResult(null);
         } catch (Exception e) {
@@ -37,12 +54,8 @@ public class HLCommModule {
         }
     }
 
-    public static void mail(Context context, String[] tos, HashMap<String, String> params, HLModuleResultListener listener){
+    public void mail(String[] tos, HashMap<String, String> params, HLModuleResultListener listener){
         if (listener == null) return;
-        if (context == null) {
-            listener.onResult("Context对象不能为空");
-            return;
-        }
 
         if (tos==null||tos.length<1){
             listener.onResult(HLUtil.getError(HLConstant.MAIL_INVALID_ARGUMENT, HLConstant.MAIL_INVALID_ARGUMENT_CODE));
@@ -64,22 +77,16 @@ public class HLCommModule {
 
         Uri uri = Uri.parse("mailto:" + url);
         Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
-//        intent.putExtra(Intent.EXTRA_CC, cc); // 抄送人
-//        intent.putExtra(Intent.EXTRA_BCC, tos);//密语人
         intent.putExtra(Intent.EXTRA_SUBJECT, subject); // 主题
         intent.putExtra(Intent.EXTRA_TEXT, body); // 正文
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
+        mContext.startActivity(intent);
         listener.onResult(null);
     }
 
-    public static void sms(Context context, String[] tos, final String text, HLModuleResultListener listener) {
+    public void sms(String[] tos, final String text, HLModuleResultListener listener) {
         if (listener == null) return;
-        if (context == null) {
-            listener.onResult("Context对象不能为空");
-            return;
-        }
-        
+
         if (tos == null || tos.length < 1) {
             listener.onResult(HLUtil.getError(HLConstant.SMS_INVALID_ARGUMENT, HLConstant.SMS_INVALID_ARGUMENT_CODE));
             return;
@@ -99,7 +106,7 @@ public class HLCommModule {
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         intent.putExtra("sms_body", text==null?"":text);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
+        mContext.startActivity(intent);
         listener.onResult(null);
     }
 }
