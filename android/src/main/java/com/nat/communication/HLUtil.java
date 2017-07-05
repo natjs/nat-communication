@@ -12,7 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by xuqinchao on 17/1/11.
+ * Created by Acathur on 17/1/11.
  * Copyright (c) 2017 Nat. All rights reserved.
  */
 
@@ -89,34 +89,13 @@ public class HLUtil {
         return file.getAbsolutePath();
     }
 
-    public static boolean isTel(String str){
-        if (TextUtils.isEmpty(str)) return false;
-        return isMobile(str) || isPhone(str);
-    }
-
-    public static boolean isMobile(String str) {
+    public static boolean isPhone(String str) {
         Pattern p = null;
         Matcher m = null;
         boolean b = false;
-        p = Pattern.compile("^[1][3,4,5,7,8][0-9]{9}$"); // 验证手机号
+        p = Pattern.compile("^\\+?[\\d\\-\\#\\*\\.\\(\\)]+$");
         m = p.matcher(str);
         b = m.matches();
-        return b;
-    }
-
-    public static boolean isPhone(String str) {
-        Pattern p1 = null,p2 = null;
-        Matcher m = null;
-        boolean b = false;
-        p1 = Pattern.compile("^[0][1-9]{2,3}-[0-9]{5,10}$");  // 验证带区号的
-        p2 = Pattern.compile("^[1-9]{1}[0-9]{5,8}$");         // 验证没有区号的
-        if(str.length() >9)
-        {   m = p1.matcher(str);
-            b = m.matches();
-        }else{
-            m = p2.matcher(str);
-            b = m.matches();
-        }
         return b;
     }
 
@@ -124,7 +103,7 @@ public class HLUtil {
         Pattern p = null;
         Matcher m = null;
         boolean b = false;
-        p = Pattern.compile("^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$"); // 验证手机号
+        p = Pattern.compile("^(\\w)+([\\.\\-\\_]\\w+)*@(\\w)+(([\\.\\-\\_]\\w+)+)$");
         m = p.matcher(str);
         b = m.matches();
         return b;

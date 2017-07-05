@@ -36,7 +36,7 @@ public class HLCommModule {
     public void call(String number, final HLModuleResultListener listener)  {
         if (listener == null) return;
 
-        boolean tel = HLUtil.isTel(number);
+        boolean tel = HLUtil.isPhone(number);
         if (!tel || TextUtils.isEmpty(number)) {
             listener.onResult(HLUtil.getError(HLConstant.CALL_INVALID_ARGUMENT, HLConstant.CALL_INVALID_ARGUMENT_CODE));
             return;
@@ -92,7 +92,7 @@ public class HLCommModule {
             return;
         }
         for (String to : tos) {
-            if (!HLUtil.isMobile(to)) {
+            if (!HLUtil.isPhone(to)) {
                 listener.onResult(HLUtil.getError(HLConstant.SMS_INVALID_ARGUMENT, HLConstant.SMS_INVALID_ARGUMENT_CODE));
                 return;
             }

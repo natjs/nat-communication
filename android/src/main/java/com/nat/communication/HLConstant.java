@@ -72,7 +72,8 @@ public class HLConstant {
     public static final String UPLOAD_NETWORK_ERROR  = "UPLOAD_NETWORK_ERROR";
 
     public static final int CALL_PHONE_PERMISSION_DENIED_CODE = 101020;
-    public static final int CALL_INVALID_ARGUMENT_CODE = 101040;
+    public static final int CALL_MISSING_ARGUMENT = 101040;
+    public static final int CALL_INVALID_ARGUMENT = 101050;
     public static final int SMS_INVALID_ARGUMENT_CODE = 102040;
     public static final int MAIL_INVALID_ARGUMENT_CODE = 103040;
 
