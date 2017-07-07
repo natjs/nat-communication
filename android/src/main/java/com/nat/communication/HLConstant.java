@@ -30,7 +30,8 @@ public class HLConstant {
     public static final int WRITE_SETTINGS_REQUEST_CODE = 1507;
 
     //nat自定义error msg
-    public static final String CALL_INVALID_ARGUMENT = "CALL_INVALID_ARGUMENT ";
+    public static final String CALL_MISSING_ARGUMENT = "CALL_MISSING_ARGUMENT";
+    public static final String CALL_INVALID_ARGUMENT = "CALL_INVALID_ARGUMENT";
     public static final String CALL_PHONE_PERMISSION_DENIED = "CALL_PHONE_PERMISSION_DENIED";
     public static final String SMS_INVALID_ARGUMENT  = "SMS_INVALID_ARGUMENT";
     public static final String MAIL_INVALID_ARGUMENT  = "MAIL_INVALID_ARGUMENT";
@@ -72,8 +73,8 @@ public class HLConstant {
     public static final String UPLOAD_NETWORK_ERROR  = "UPLOAD_NETWORK_ERROR";
 
     public static final int CALL_PHONE_PERMISSION_DENIED_CODE = 101020;
-    public static final int CALL_MISSING_ARGUMENT = 101040;
-    public static final int CALL_INVALID_ARGUMENT = 101050;
+    public static final int CALL_MISSING_ARGUMENT_CODE = 101040;
+    public static final int CALL_INVALID_ARGUMENT_CODE = 101050;
     public static final int SMS_INVALID_ARGUMENT_CODE = 102040;
     public static final int MAIL_INVALID_ARGUMENT_CODE = 103040;
 
