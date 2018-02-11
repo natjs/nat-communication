@@ -1,27 +1,25 @@
 //
-//  NatComm.m
+//  NatCommunication.m
 //
 //  Created by huangyake on 17/1/7.
 //  Copyright © 2017 Instapp. All rights reserved.
 //
 
 
-#import "NatComm.h"
+#import "NatCommunication.h"
 #import <MessageUI/MessageUI.h>
 
 
-@interface NatComm ()
+@interface NatCommunication ()
 
 @property(nonatomic, strong)NatCallback mailback;
-
 @property(nonatomic, strong)NatCallback smsback;
-
 
 @end
 
-@implementation NatComm
+@implementation NatCommunication
 
-+ (NatComm *)singletonManger{
++ (NatCommunication *)singletonManger{
     static id manager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -198,6 +196,5 @@
     
     return result;
 }
-
 
 @end
